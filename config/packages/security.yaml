@@ -1,11 +1,13 @@
 security:
     encoders:
-        AppBundle\Entity\User: bcrypt
+        App\Entity\User:
+            algorithm: auto
 
     providers:
-        doctrine:
+        in_memory: { memory: null }
+        in_database:
             entity:
-                class: AppBundle:User
+                class: App\Entity\User
                 property: username
 
     firewalls:
@@ -14,11 +16,11 @@ security:
             security: false
 
         main:
-            anonymous: ~
-            pattern: ^/
+            anonymous: true
+            provider: in_database
             form_login:
                 login_path: login
-                check_path: login_check
+                check_path: login
                 always_use_default_target_path:  true
                 default_target_path:  /
             logout: ~
@@ -26,4 +28,4 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/users, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER }
