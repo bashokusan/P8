@@ -24,6 +24,8 @@ class TaskController extends AbstractController
     public function createAction(Request $request)
     {
         $task = new Task();
+        $task->setAuthor($this->getUser());
+
         $form = $this->createForm(TaskType::class, $task);
 
         $form->handleRequest($request);
