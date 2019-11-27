@@ -12,8 +12,8 @@
 !var/sessions/.gitkeep
 !var/SymfonyRequirements.php
 /web/bundles/
-Migrations/
 .idea/
+Migrations/
 
 ###> symfony/phpunit-bridge ###
 .phpunit
