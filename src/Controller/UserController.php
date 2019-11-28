@@ -36,6 +36,8 @@ class UserController extends AbstractController
 
             if(true === $form['roles']->getData()){
                 $user->setRoles(['ROLE_ADMIN']);
+            }else{
+                $user->setRoles(['ROLE_USER']);
             }
 
             $em->persist($user);
@@ -65,7 +67,7 @@ class UserController extends AbstractController
             if(true === $form['roles']->getData()){
                 $user->setRoles(['ROLE_ADMIN']);
             }else{
-                $user->setRoles([]);
+                $user->setRoles(['ROLE_USER']);
             }
 
             $this->getDoctrine()->getManager()->flush();
