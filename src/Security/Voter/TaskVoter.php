@@ -10,7 +10,7 @@ class TaskVoter extends Voter
 {
     protected function supports($attribute, $subject)
     {
-        return in_array($attribute, ['TASK_DELETE'])
+        return $attribute === 'TASK_DELETE'
             && $subject instanceof \App\Entity\Task;
     }
 
@@ -22,16 +22,10 @@ class TaskVoter extends Voter
             return false;
         }
 
-        switch ($attribute) {
-            case 'TASK_DELETE':
-                if(null == $subject->getAuthor()){
-                    return $user->getRoles() == ['ROLE_ADMIN'];
-                }
-
-                return $subject->getAuthor() == $user;
-                break;
+        if(null == $subject->getAuthor()){
+            return in_array('ROLE_ADMIN', $user->getRoles());
         }
 
-        return false;
+        return $subject->getAuthor() == $user;
     }
 }
