@@ -37,7 +37,7 @@
     "require-dev": {
         "symfony/dotenv": "^4.0",
         "symfony/maker-bundle": "^1.14",
-        "symfony/phpunit-bridge": "^4.0"
+        "symfony/phpunit-bridge": "^5.0"
     },
     "config": {
         "preferred-install": {
