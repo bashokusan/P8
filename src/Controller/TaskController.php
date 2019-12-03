@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Form\TaskType;
+use App\Utils\Slugger;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +32,7 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $task->setSlug(Slugger::slugify($task->getTitle()));
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($task);
@@ -42,6 +44,16 @@ class TaskController extends AbstractController
         }
 
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/tasks/{slug}", name="task_show")
+     */
+    public function showAction(Task $task)
+    {
+        return $this->render('task/show.html.twig', [
+            'task' => $task,
+        ]);
     }
 
     /**
