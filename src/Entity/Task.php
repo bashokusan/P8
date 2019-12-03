@@ -2,14 +2,12 @@
 
 namespace App\Entity;
 
-use App\Utils\Slugger;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
  * @ORM\Table("task")
- * @ORM\HasLifecycleCallbacks()
  */
 class Task
 {
@@ -125,13 +123,5 @@ class Task
         $this->slug = $slug;
 
         return $this;
-    }
-
-    /**
-     * @ORM\PrePersist()
-     */
-    public function slugifyTitle()
-    {
-        $this->setSlug(Slugger::slugify($this->title));
     }
 }
