@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <h2>{{ task.title }}</h2>
+        <em>{{ task.author.username }}</em>
+        <p>{{ task.content }}</p>
+    </div>
+{% endblock %}
