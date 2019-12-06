@@ -43,6 +43,17 @@ class TaskControllerTest extends WebTestCase
         $this->assertSame(1, $crawler->filter('div.alert.alert-success')->count());
     }
 
+    public function testShowTask()
+    {
+        $client = static::createClient([], [
+            'PHP_AUTH_USER'  => 'user',
+            'PHP_AUTH_PW' => 'password',
+        ]);
+        $client->request('GET', '/tasks/title');
+
+        $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+    }
+
     public function testEditTask()
     {
         $newTaskTitle = 'new title';
@@ -65,14 +76,38 @@ class TaskControllerTest extends WebTestCase
         $this->assertSame(1, $crawler->filter('div.alert.alert-success')->count());
     }
 
-    public function testDeleteTask()
+    public function testToggleTask()
     {
         $client = static::createClient([], [
             'PHP_AUTH_USER'  => 'user',
             'PHP_AUTH_PW' => 'password',
         ]);
-        $crawler = $client->request('GET', '/tasks');
-        $client->submit($crawler->filter('button.btn.btn-danger')->form());
+        $client->request('GET', '/tasks/1/toggle');
+
+        $this->assertSame(Response::HTTP_FOUND, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+        $this->assertSame(1, $crawler->filter('div.alert.alert-success')->count());
+    }
+
+    public function testDeleteTaskUnauthorized()
+    {
+        $client = static::createClient([], [
+            'PHP_AUTH_USER'  => 'newname8642626',
+            'PHP_AUTH_PW' => 'password',
+        ]);
+        $client->request('GET', '/tasks/1/delete');
+
+        $this->assertSame(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode());
+    }
+
+    public function testDeleteTaskAuthorized()
+    {
+        $client = static::createClient([], [
+            'PHP_AUTH_USER'  => 'user',
+            'PHP_AUTH_PW' => 'password',
+        ]);
+        $client->request('GET', '/tasks/1/delete');
 
         $this->assertSame(Response::HTTP_FOUND, $client->getResponse()->getStatusCode());
 
