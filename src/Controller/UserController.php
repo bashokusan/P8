@@ -38,9 +38,9 @@ class UserController extends AbstractController
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
 
-            if(true === $form['roles']->getData()){
+            if (true === $form['roles']->getData()) {
                 $user->setRoles(['ROLE_ADMIN']);
-            }else{
+            } else {
                 $user->setRoles(['ROLE_USER']);
             }
 
@@ -68,9 +68,9 @@ class UserController extends AbstractController
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
 
-            if(true === $form['roles']->getData()){
+            if (true === $form['roles']->getData()) {
                 $user->setRoles(['ROLE_ADMIN']);
-            }else{
+            } else {
                 $user->setRoles(['ROLE_USER']);
             }
 

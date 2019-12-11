@@ -3,7 +3,6 @@
 
 namespace App\Utils;
 
-
 class Slugger
 {
     private static function removeAccent($string)

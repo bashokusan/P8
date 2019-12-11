@@ -22,7 +22,7 @@ class TaskVoter extends Voter
             return false;
         }
 
-        if(null == $subject->getAuthor()){
+        if (null == $subject->getAuthor()) {
             return in_array('ROLE_ADMIN', $user->getRoles());
         }
 

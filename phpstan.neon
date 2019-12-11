@@ -1,0 +1,10 @@
+parameters:
+    autoload_files:
+        - bin/.phpunit/phpunit-7.5-0/vendor/autoload.php
+    excludes_analyse:
+        - src/Migrations/
+    symfony:
+        container_xml_path: '%rootDir%/../../../var/cache/dev/srcApp_KernelDevDebugContainer.xml'
+includes:
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-symfony/rules.neon
