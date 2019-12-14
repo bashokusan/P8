@@ -5,7 +5,7 @@ Base du projet #8 : Améliorez un projet existant
 
 https://openclassrooms.com/projects/ameliorer-un-projet-existant-1
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a8a53bc40db64af89260c583062c9b3d)](https://www.codacy.com/manual/bashokusan/P7?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bashokusan/P7&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/520aa5b23b8040c9b5aea8d9ecc87065)](https://www.codacy.com/manual/bashokusan/P8?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bashokusan/P8&amp;utm_campaign=Badge_Grade)
 
 ## Installation
 
@@ -26,6 +26,10 @@ bin/console doctrine:database:create
 4. Importer les tables dans la database
 ```
 bin/console doctrine:migrations:migrate
+```
+5. (optional) Load the fixtures
+```
+bin/console doctrine:fixtures:load
 ```
 ## Testing
 Lancer les tests avec phpunit
