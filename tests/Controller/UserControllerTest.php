@@ -43,10 +43,11 @@ class UserControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/users/create');
 
         $form = $crawler->selectButton('Ajouter')->form([
-            'user[username]' => 'username',
+            'user[username]' => 'user-'.mt_rand(),
             'user[password][first]' => 'password',
             'user[password][second]' => 'password',
-            'user[email]' => 'email@mail.com',
+            'user[email]' => 'email'.mt_rand().'@mail.com',
+            'user[roles]' => ['ROLE_USER'],
         ]);
 
         $client->submit($form);
@@ -58,8 +59,6 @@ class UserControllerTest extends WebTestCase
 
     public function testEditUser()
     {
-        $newUsername = 'newname';
-
         $client = static::createClient([], [
             'PHP_AUTH_USER'  => 'admin',
             'PHP_AUTH_PW' => 'password',
@@ -67,9 +66,9 @@ class UserControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/users/1/edit');
 
         $form = $crawler->selectButton('Modifier')->form([
-            'user[username]' => $newUsername,
             'user[password][first]' => 'password',
             'user[password][second]' => 'password',
+            'user[roles]' => ['ROLE_ADMIN'],
         ]);
 
         $client->submit($form);

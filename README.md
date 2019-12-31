@@ -25,7 +25,7 @@ bin/console doctrine:database:create
 ```
 4. Importer les tables dans la database
 ```
-bin/console doctrine:migrations:migrate
+bin/console doctrine:schema:update --force
 ```
 5. (optional) Load the fixtures
 ```
